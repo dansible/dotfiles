@@ -1,0 +1,100 @@
+#!/bin/bash
+
+# bash_exports
+
+###--------------------------------SHELL-------------------------------###
+#   Set default blocksize for ls, df, du
+#   from this: http://hints.macworld.com/comment.php?mode=view&cid=24491
+#   ------------------------------------------------------------
+export BLOCKSIZE=1k
+
+# Make new shells get the history lines from all previous
+# shells instead of the default "last window closed" history
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
+# Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
+export PYTHONIOENCODING='UTF-8';
+
+# Prefer US English and use UTF-8.
+export LANG='en_US.UTF-8';
+export LC_ALL='en_US.UTF-8';
+
+# Avoid issues with `gpg` as installed via Homebrew.
+# https://stackoverflow.com/a/42265848/96656
+export GPG_TTY=$(tty);
+
+
+
+###-------------------------------HISTORY-------------------------------###
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+export HISTCONTROL=ignoreboth
+
+# Increase Bash history size. Allow 32³ entries; the default is 500.
+export HISTSIZE='32768';
+
+# Increase the maximum number of lines contained in the history file
+# (default is 500)
+export HISTFILESIZE="${HISTSIZE}";
+
+
+
+###-------------------------------PAGER-------------------------------###
+# fuck less
+export LESS='-ciJMRw'
+
+#-c:clear screen
+#-I case-insensisitve search:
+#-J:status column
+#-M:show file name + line #
+#-R:raw ctrl chars
+#-w:highlight unread
+
+export SYSTEMD_PAGER=less
+
+# Don’t clear the screen after quitting a manual page.
+export MANPAGER='less -X';
+
+#export LESSOPEN="| /usr/local/bin/src-hilite-lesspipe.sh %s"
+#export LESSOPEN="| /usr/local/bin/highlight %s --out-format truecolor --style vampire"
+#moria maroloccio solarized-light"
+export LESSOPEN="| /usr/local/bin/highlight %s -O xterm256 --failsafe -s maroloccio"
+
+
+# Make vim the default editor
+export EDITOR="vim"
+
+# Use Vim as a Man pager
+# https://zameermanji.com/blog/2012/12/30/using-vim-as-manpager/
+#export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
+
+
+###-------------------------------COLORS--------------------------------###
+#   Add color to terminal
+#   (this is all commented out as I use Mac Terminal Profiles)
+#   from http://osxdaily.com/2012/02/21/add-color-to-the-terminal-in-mac-os-x/
+#   ------------------------------------------------------------
+export CLICOLOR=1
+
+export GREP_COLOR="1;32"
+
+# Less colors
+# From: https://unix.stackexchange.com/questions/108699/documentation-on-less-termcap-variables
+# also good: https://unix.stackexchange.com/questions/169952/man-page-highlight-color
+if [ -z "${TERM}" ] ; then
+	export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
+	export LESS_TERMCAP_md=$(tput bold; tput setaf 6) # cyan
+	export LESS_TERMCAP_me=$(tput sgr0)
+	export LESS_TERMCAP_so=$(tput smso; tput setab 9; tput setaf 3) # yellow on blue
+	export LESS_TERMCAP_se=$(tput smso; tput sgr0)
+	export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 7; tput setab 9) # white
+	export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
+	export LESS_TERMCAP_mr=$(tput rev)
+	export LESS_TERMCAP_mh=$(tput dim)
+	export LESS_TERMCAP_ZN=$(tput ssubm)
+	export LESS_TERMCAP_ZV=$(tput rsubm)
+	export LESS_TERMCAP_ZO=$(tput ssupm)
+	export LESS_TERMCAP_ZW=$(tput rsupm)
+fi
+
+

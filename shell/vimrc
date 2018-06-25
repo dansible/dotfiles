@@ -1,0 +1,218 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Name: vimrc
+" Sources: https://github.com/amix/vimrc
+"
+"	use "syntax list" if you ever get stuck ;)
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =>Files:
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" source $HOME/.vim/mappings.vim			"Key-mapping file
+" source $HOME/.vim/tabline.vim          "Tab styling file
+" source $HOME/.vim/tabmessage.vim       "Function to open vim pager menus in tabs
+
+"set verbosefile=$HOME/.log/vim.log     "Set logfile 4 debugging
+
+filetype plugin on							"Enable filetype plugins:
+filetype indent on							"Enable filetype identification
+
+
+" =>Vim Config:
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible        			"Don't bother with vi compatibility
+set history=200         			"Set how many lines of history VIM has to remember
+set encoding=utf8       			"Set utf8 as standard encoding and en_US as the standard language
+set ffs=unix,dos,mac    			"Use Unix as the standard file type
+
+" =>Keyboard functionality:
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set backspace=indent,eol,start	"Configure backspace so it acts as it should act
+set whichwrap=<,>,[,],b,s        "Wrap around when using arrow keys, backspace and space
+
+
+
+" =>Files, backups and undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nobackup				"Works with <writebackup> below:
+set writebackup		"Backup current file, deleted afterwards (default)
+set noswapfile				"wtv it's not 1980 anymore
+"set autoread           "Set to auto read when a file is changed from the outside
+
+
+
+" =>Viminfo File: Tell vim to remember certain things when we exit
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  '10  :  marks will be remembered for up to 10 previously edited files
+"  "100 :  will save up to 100 lines for each register
+"  :20  :  up to 20 lines of command-line history will be remembered
+"  %    :  saves and restores the buffer list
+"  n... :  where to save the viminfo files
+set viminfo='10,\"100,:20,%,n~/.viminfo
+
+
+
+" UI :
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set wildmenu                     "Turn on the WiLd menu (cli autocompletion)
+set wildmode=longest,list,full   "Cli autocompletion: long list -> fill
+set showcmd                      "Display incomplete commands
+set shortmess+=mr                "[+]:modified and [RO]:ReadOnly
+
+set scrolloff=10         			"Number of context lines to keep above/below cursor
+set cmdheight=1          			"Height of the command bar
+set lazyredraw           			"Don't redraw while executing macros (good performance config)
+set ruler                			"Always show cursor position
+set cursorline           			"Use leader+e to toglle
+
+let &showbreak='+++ '      		"Show a > for word-wrapped lines
+"set hid                   		"A buffer becomes hidden when it is abandoned
+"set magic                 		"For expressions turn magic on
+
+"How to render invisible characters (super+l)
+set listchars=tab:>.,trail:#,extends:#,nbsp:#
+"whether to use a popup menu for Insert mode completion
+" set completeopt=menu,preview,noinsert
+
+autocmd VimResized * :wincmd =                        	"Automatically rebalance windows on vim resize
+autocmd FileType text setlocal textwidth=78           	"For all text files set 'textwidth' to 78 characters
+
+
+" =>Errors:
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set errorbells           	"Enables error notifications
+"set belloff=all          	"All error events will trigger a bell
+set visualbell           	"Uses visual cues
+
+
+" =>Tabstuff:
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set shiftwidth=3        	"1 tab == 3 spaces
+set tabstop=3
+set softtabstop=3
+set ai                  	"Auto indent
+set si                  	"Smart indent
+set expandtab           	"Use spaces instead of tabs
+set smarttab           		"Be smart when using tabs ;)
+
+
+" =>Copy / Paste:
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set paste               	"Paste stuff all raw
+set showmode           		"Show the current paste mode
+set clipboard=unnamed      "Yank and paste with the system clipboard
+
+
+" =>Searching and Matching:
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set showmatch              "Show matching brackets when text indicator is over them
+set mat=2                  "How many tenths of a second to blink when matching brackets
+
+set ignorecase             "Ignore case when searching
+set smartcase              "When searching try to be smart about cases
+set hlsearch               "Highlight search results
+set incsearch              "Makes search act like search in modern browsers
+
+
+" =>Mouse:
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"set mouse=a                "Enable basic mouse behavior such as resizing buffers.
+"if exists('$TMUX')         "Support resizing in tmux
+"	set ttymouse=xterm2
+"endif
+
+
+" =>Diff options:
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if &diff
+    " :DiffOrig to check what you've changed
+    set diffopt+=filler,iwhite,vertical,foldcolumn:3
+	 set scrollbind
+	 set cursorbind
+endif
+
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts:
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax enable                    "Enable syntax highlighting
+
+colorscheme default                "Colorscheme configuration:
+"Useful colors: 8, 11, 51, 59, 60, 94, 95 slate
+"set background=light            "Handy to configure
+hi Comment ctermfg=103           "Darker comments
+
+" Fix the tab colors / contrasts
+hi TabLine term=standout cterm=standout ctermfg=103 ctermbg=24
+
+" Get the error messages looking right
+hi ErrorMsg cterm=bold ctermfg=Black ctermbg=1
+hi Error ctermfg=1 ctermbg=0 cterm=bold
+
+" Searches and vim messages
+hi Statement ctermfg=11
+hi IncSearch ctermfg=0 ctermbg=Yellow cterm=bold
+hi Search ctermfg=24 ctermbg=Yellow cterm=standout
+
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Status line:
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set laststatus=2			"Always show the status line
+
+" custom highlight groups for statusline
+hi User1 term=bold,reverse cterm=bold,reverse guifg=black guibg=#c2bfa5                      "StatusLine (White BG)
+hi User2 term=standout cterm=bold ctermfg=0 ctermbg=1 guifg=White guibg=Red                  "ErrorMsg   (Red BG)
+hi User3 term=reverse cterm=bold ctermfg=0 ctermbg=11 gui=reverse guifg=green guibg=black    "Filename   (Yellow BG)
+
+" Configure the StatusLine:
+set statusline=%1*                     "Set colors    [User1]
+set statusline+=\ %{tabpagenr()}:		"Display the tab #
+set statusline+=\ %{getcwd()}/         "Show working dir
+set statusline+=\ %3*                  "Set colors    [User3]
+set statusline+=[%t\]  	               "Show the filename
+set statusline+=%2*                    "Set colors    [User2]
+set statusline+=%m     		            "Modified flag
+set statusline+=%r     		            "Read-only flag
+set statusline+=%h  	   	            "Help file flag
+set statusline+=%w      	            "Preview flag
+set statusline+=%1*                    "Set colors    [User1]
+set statusline+=\ %{FileSize()}        "File size (see filesize.vim)
+set statusline+=%=						   "Right align
+set statusline+=Line:\ %l/%L\    	   "Cursor V-position x/total
+set statusline+=%2*                    "Set colors    [User2]
+set statusline+=\ %P\ 					   "Percent of file
+set statusline+=%1*                    "Set Colors    [User1]
+set statusline+=\ Column:\ %c          "Cursor H-position
+set statusline+=\ %y                   "File type
+
+" Invert the statusline when entering/exiting Insert mode
+au InsertEnter * set statusline=%2*\ %{tabpagenr()}:\ %{getcwd()}/\ %3*[%t\]%1*%m%r%h%w%2*\ %{FileSize()}%=Line:\ %l/%L\ %1*\ %P\ %2*\ Column:\ %c\ %y
+au InsertLeave * set statusline=%1*\ %{tabpagenr()}:\ %{getcwd()}/\ %3*[%t\]%2*%m%r%h%w%1*\ %{FileSize()}%=Line:\ %l/%L\ %2*\ %P\ %1*\ Column:\ %c\ %y
+
+" Source: http://got-ravings.blogspot.ca/2008/08/vim-pr0n-making-statuslines-that-own.html
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! FileSize()
+    let bytes = getfsize(expand("%:p"))
+    if bytes <= 0
+        return ""
+    endif
+    if bytes < 1024
+        return bytes
+    else
+        return (bytes / 1024) . "K"
+    endif
+endfunction
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Additional Syntax:
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufRead,BufNewFile *.fdoc set filetype=yaml               	"YAML syntax
+autocmd BufRead,BufNewFile,BufReadPost *.md set filetype=markdown		"Markdown syntax
+au BufEnter,BufRead *.conf setf dosini
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']         "Languages that markdown can appear alongside

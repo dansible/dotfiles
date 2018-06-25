@@ -1,0 +1,36 @@
+#!/bin/bash
+# .bash_profile
+
+# set 256 color profile where possible
+#if [[ $COLORTERM == gnome-* && $TERM == xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
+#    export TERM=gnome-256color
+#elif infocmp xterm-256color >/dev/null 2>&1; then
+#    export TERM=xterm-256color
+#fi
+
+BASH_FILES="${HOME}/.dotfiles/shell/bash"
+FUNCTIONS="${HOME}/.dotfiles/shell/functions"
+
+BREW_PREFIX="$(/usr/local/bin/brew --prefix)"
+export BREW_PREFIX
+
+load_bash() {
+    declare -a files=(
+        "${BASH_FILES}/bash_aliases"
+        "${BASH_FILES}/bash_exports"
+        "${BASH_FILES}/bash_options"
+        "${BASH_FILES}/bash_paths"
+        "${BASH_FILES}/bash_prompt"
+
+        "${FUNCTIONS}/pyserver"
+        "${FUNCTIONS}/git-updateall"
+
+        "${BREW_PREFIX}/etc/bash_completion"
+    )
+    # if these files are readable, source them
+    for index in ${!files[*]} ; do
+      [ -r "${files[$index]}" ] && source "${files[$index]}"
+    done
+}
+load_bash
+#unset load_bash

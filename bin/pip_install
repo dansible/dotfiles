@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+# install brew and brew packages
+
+# set -x
+set -o errexit
+set -o pipefail
+
+e_header "Installing pip packages..."
+
+install_packages() {
+    e_header "Checking status of desired Homebrew formulae..."
+    local -a packages=(
+      'ansible'
+      'ansible-vault'
+      'colorama'
+      'cryptography'
+      'dnet'
+      'docutils'
+      'futures'
+      'get'
+      'importlib'
+      'ipaddress'
+      'Jinja2'
+      'jmespath'
+      'MarkupSafe'
+      'matplotlib'
+      'numpy'
+      'paramiko'
+      'pip'
+      'post'
+      'protobuf'
+      'public'
+      'pyasn1'
+      'pycparser'
+      'PyNaCl'
+      'pyparsing'
+      'python-dateutil'
+      'PyYAML'
+      'query-string'
+      'request'
+      'requests'
+      'rsa'
+      's3transfer'
+      'scikit-learn'
+      'scipy'
+      'setupfiles'
+      'setuptools'
+      'six'
+      'subprocess32'
+      'urllib3'
+      'virtualenv'
+      'wheel'
+    )
+    for item in ${packages[*]} ; do
+      e_header "Installing $item..."
+      pip install "$item" --upgrade
+    done
+}
+install_packages

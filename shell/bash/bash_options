@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# bash_exports
+
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell
+
+# Check the window size after each command and, if necessary, update the values
+# of LINES and COLUMNS.
+shopt -s checkwinsize
+
+shopt -s cmdhist
+shopt -s expand_aliases
+shopt -s extquote
+shopt -s force_fignore
+
+# Append to the Bash history file, rather than overwriting it
+shopt -s histappend
+
+shopt -s hostcomplete
+shopt -s interactive_comments
+shopt -s login_shell
+
+# Case-insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob
+
+shopt -s progcomp
+shopt -s promptvars
+shopt -s sourcepath
+
+
+#set editing-mode vi
+#set keymap vi
+
+# Bash 4 features:
+# Recursive globbing, e.g. `echo **/*.txt`
+#shopt -s globstar
+
+# e.g. `**/qux` will enter `./foo/bar/baz/qux`
+#shopt -s autocd
+
+
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+
+# Add `killall` tab completion for common apps
+complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal" killall;
+

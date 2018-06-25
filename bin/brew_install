@@ -1,0 +1,107 @@
+#!/usr/bin/env bash
+# install brew and brew packages
+
+# set -x
+set -o errexit
+set -o pipefail
+
+# install brew:
+if ! type_exists "brew" ; then
+    e_header "Installing Homebrew..."
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+e_header "Updating Homebrew..."
+# Use the latest version of Homebrew
+brew update
+[[ $? ]] && e_success "Done"
+
+e_header "Updating any existing Homebrew formulae..."
+# Upgrade any already-installed formulae
+brew upgrade
+[[ $? ]] && e_success "Done"
+
+# Test whether a Homebrew formula is already installed
+formula_exists() {
+    if brew list "$1" &>/dev/null ; then
+        printf "%s already installed.\\n" "$1"
+        return 0
+    fi
+
+    e_warning "Missing formula: $1"
+    return 1
+}
+
+install_packages() {
+    e_header "Checking status of desired Homebrew formulae..."
+    local list_formulae
+    local -a missing_formulae
+    local -a desired_formulae=(
+        'bash' # upgrade bash
+        'bash-completion2'
+        'bashdb' # bash debugger
+        'coreutils' # GNU core utilities (those that come with OS X are outdated)
+        'findutils' # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
+        'git'
+        'gnu-sed --with-default-names' # Install GNU `sed`, overwriting the built-in `sed`
+        'grep'
+        'highlight' # needed 4 basics like less, vim, code, etc
+        'htop'
+        'hugo'
+        'ipcalc'
+        'irssi'
+        'jq'
+        'kubernetes-cli'
+        'kubernetes-helm'
+        'nmap'
+        'node'
+        'openssh'
+        'openssl'
+        'packer'
+        'python'
+        'python3'
+        'ruby'
+        'shellcheck'
+        'tmux'
+        'tree'
+        'vim --with-override-system-vi'
+        'watch'
+        'wget --with-iri'
+        'xz'
+        'youtube-dl'
+    )
+    for index in ${!desired_formulae[*]}
+    do
+        if ! formula_exists ${desired_formulae[$index]}; then
+            # Store the name (and options) of every missing formula
+            missing_formulae=("${missing_formulae[@]}" "${desired_formulae[$index]}")
+        fi
+    done
+
+    if [[ "$missing_formulae" ]]; then
+        # Convert the array of missing formula into a list of space-separate strings
+        list_formulae=$( printf "%s " "${missing_formulae[@]}" )
+
+        e_header "Installing $list_formulae..."
+        # Install all missing formulae
+        brew install $list_formulae
+
+        [[ $? ]] && e_success "Done"
+    fi
+}
+install_packages
+
+# Remove outdated versions from the Cellar
+brew cleanup
+
+### ensure shell is using bash 4.4:
+BASH_VERSION_CHECK="GNU bash, version 4.4"
+if bash --version | grep "$BASH_VERSION_CHECK" &>/dev/null; then
+    e_header "Done"
+else
+    e_header "Configuring GNU bash v4 as the default shell"
+    if /usr/local/bin/bash --version | grep "$BASH_VERSION_CHECK" &>/dev/null; then
+        sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+        chsh -s /usr/local/bin/bash
+    fi
+fi

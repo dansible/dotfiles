@@ -1,0 +1,82 @@
+{
+    // ansible-vault password file path
+    "ansibleVault.keyfile": "/Users/dpacrami/0-proj/PAAS/build_config/common",
+
+    // "docker.defaultRegistry": "https://artifactory.vas.int.bell.ca:5000",
+
+    "editor.find.seedSearchStringFromSelection": false,
+    "editor.formatOnType": true,
+    "editor.minimap.enabled": true,
+    "editor.quickSuggestions": false,
+    "editor.renderWhitespace": "boundary",
+    "editor.scrollBeyondLastLine": false,
+    "editor.tabCompletion": true,
+    "editor.tabSize": 2,
+    "editor.wordWrap": "on",
+    "editor.wrappingIndent": "indent",
+
+    "files.trimTrailingWhitespace": true,
+
+    "git.path": "/usr/local/bin/git",
+    "git.enableSmartCommit": true,
+
+    "html.format.indentHandlebars": true,
+
+    "http.proxy": "",
+    "http.proxyStrictSSL": true,
+
+    // "markdown.preview.breaks": true,
+
+    "problems.autoReveal": true,
+    // "problems.decorations.enabled": true,
+
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+
+    "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.shell.osx": "/bin/bash",
+
+    // "vim.disableAnnoyingNeovimMessage": true,
+    // "vim.startInInsertMode": true,
+    // "window.restoreWindows": "all",
+    // "window.nativeTabs": true,
+    "window.zoomLevel": 1,
+    "workbench.editor.swipeToNavigate": false,
+    "workbench.sideBar.location": "left",
+    // // https://code.visualstudio.com/docs/getstarted/theme-color-reference
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#FFF3FD",
+        "contrastBorder": "#FFF3FD",
+        // "editor.background": "#2B2D53"
+        // "editor.foreground": "#FFF3FD"
+        // "editor.selectionBackground": "#fff",
+        // "editor.selectionHighlightBackground": "#e3e3e3"
+        // "editor.inactiveSelectionBackground": "#fff"
+        // "editor.wordHighlightBackground": "#e3e3e3"
+        // "editor.lineHighlightBackground": "#e3e3e3"
+        // "foreground": "#fff",
+        // "panel.background": "#fff"
+        // "terminal.background": "#fff"
+        // "terminal.foreground": "#fff"
+        // "sideBar.background": "#c",
+        "list.inactiveSelectionBackground": "#FF9AC170",
+        "list.activeSelectionBackground": "#FF9AC170",
+        "list.focusBackground": "#FF9AC170",
+        "list.hoverBackground": "#FF9AC170",
+        "sidebar.background": "#FF9AC170",
+        "sidebar.border": "#2B2D53",
+        "sidebar.dropBackground": "#2B2D53",
+        "tabActiveForeground": "FF75B5",
+        // "sideBar.foreground": "#2B2D53",
+        "list.contrastBorder": "#FF2C6D",
+        // "list.foreground": "#FF2C6D",
+        "list.background": "#FF9AC170"
+        // "sideBarSectionHeader.foreground": "#2B2D53"
+        // }
+    },
+    "workbench.iconTheme": "eq-material-theme-icons",
+    "workbench.colorTheme": "Monokai Dimmed",
+    // "colorTheme": "Ysgrifennwr",
+    // // "Popping and Locking",
+    "workbench.activityBar.visible": false
+}
