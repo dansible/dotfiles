@@ -1,13 +1,9 @@
 # Install
-`make all` runs the following submakes:
-- make bin (installs apps from `apps` dir)
-- make dotfiles (symlinks dotfiles from `shell` dir)
-- make osx (configures osx settings as in `osx` dir)
+`__init.sh` in the root dir runs the same file in the bin and shell directories
 
-`make test` runs shellcheck on all files in this dir
 
-## bin
-- brew
+# TODO:
+The following apps currently require manual installs
 - Docker
 - Dropbox
 - Essence (vscode) - plugins?
@@ -31,7 +27,6 @@
 
 
 # Acknowledgements
-
 Inspiration and code was taken from many sources, including:
 - @necolas (Nicolas Gallagher) https://github.com/necolas/dotfiles/
 - @mathiasbynens (Mathias Bynens) https://github.com/mathiasbynens/dotfiles

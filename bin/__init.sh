@@ -8,6 +8,7 @@ set -o pipefail
 SELF="$(basename "$0")"
 DOTFILES="${HOME}/.dotfiles"
 BIN_PATH="${DOTFILES}/bin"
+if [[ ! -d "$BIN_PATH" ]] ; then exit 1; fi
 
 # Run bin scripts
 for item in "${BIN_PATH}"/*; do

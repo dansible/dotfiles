@@ -8,6 +8,7 @@ set -o pipefail
 SELF="$(basename "$0")"
 DOTFILES="${HOME}/.dotfiles"
 SHELL_PATH="${DOTFILES}/shell"
+if [[ ! -d "$SHELL_PATH" ]] ; then exit 1; fi
 
 # output to a directory if an argument is provided
 if [[ -n "$1" ]]  ; then OUTPATH="$1" ; else OUTPATH="$HOME" ; fi

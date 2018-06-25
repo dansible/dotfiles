@@ -6,75 +6,16 @@ set -o errexit
 set -o pipefail
 
 TARGET="$1"
-
 DOTFILES="${HOME}/.dotfiles"
 if [[ ! -d "$DOTFILES" ]] ; then exit 1; fi
-
-
-# Header logging
-e_header() {
-    printf "\n$(tput setaf 7)%s$(tput sgr0)\n" "$@"
-}
-typeset -fx e_header
-
-# Success logging
-e_success() {
-    printf "$(tput setaf 64)✓ %s$(tput sgr0)\n" "$@"
-}
-typeset -fx e_success
-
-# Error logging
-e_error() {
-    printf "$(tput setaf 1)x %s$(tput sgr0)\n" "$@"
-}
-typeset -fx e_error
-
-# Warning logging
-e_warning() {
-    printf "$(tput setaf 136)! %s$(tput sgr0)\n" "$@"
-}
-typeset -fx e_warning
-
-# Ask for confirmation before proceeding
-seek_confirmation() {
-    printf "\n"
-    e_warning "$@"
-    read -p "Continue? (y/n) " -n 1
-    printf "\n"
-}
-typeset -fx seek_confirmation
-
-# Test whether the result of an 'ask' is a confirmation
-is_confirmed() {
-    if [[ "$REPLY" =~ ^[Yy]$ ]]; then
-      return 0
-    fi
-    return 1
-}
-typeset -fx is_confirmed
-
-# Test whether we're in a git repo
-is_git_repo() {
-    $(git rev-parse --is-inside-work-tree &> /dev/null)
-}
-typeset -fx is_git_repo
-
-# Test whether a command exists
-# $1 - cmd to test
-type_exists() {
-    if [ $(type -P $1) ]; then
-      return 0
-    fi
-    return 1
-}
-typeset -fx type_exists
+if [[ -f "${DOTFILES}/utils" ]] ; then source "${DOTFILES}/utils"; else exit 1; fi
 
 case "$TARGET" in
     all)
         e_header "Running scripts in bin..."
         bin/__init.sh
         e_header "Creating symbolic links..."
-        bash bin/__init.sh
+        bin/__init.sh
         ;;
     bin)
         e_header "Running scripts in bin..."
