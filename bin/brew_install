@@ -63,6 +63,8 @@ install_packages() {
         'ruby'
         'shellcheck'
         'tmux'
+        'tor'
+        'transmission'
         'tree'
         'vim --with-override-system-vi'
         'watch'
