@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# display ssh config if no args
+# setup new jumpbox if given IP as arg
+
+if [ "$#" -lt 1 ]; then
+	cat "$HOME/.ssh/config"
+else
+	NEW_IP="$1"
+	OLD_IP="$(awk -F @ '/ProxyCommand/ {print $2}' "$HOME/.ssh/config")"
+	sed -i.bak "s/$OLD_IP/$NEW_IP/" "$HOME/.ssh/config"
+	cat "$HOME/.ssh/config"
+fi

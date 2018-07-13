@@ -1,0 +1,28 @@
+#!/bin/bash
+# based on: https://github.com/kubernetes/minikube/issues/38
+
+# set -x
+MINIKUBEIP="$(minikube ip)"
+
+if [[ -z "$MINIKUBEIP" ]] ; then return 1; fi
+
+echo "Minikube ip is $MINIKUBEIP"
+
+# clean up the routes
+if netstat -nr | grep 172.17.0.0/16 ; then
+  sudo route -n delete 172.17.0.0/16
+fi
+if netstat -nr | grep 10.0.0.0/24 ; then
+  sudo route -n delete 10.0.0.0/24
+fi
+
+# Add the routes
+sudo route -n add 172.17.0.0/16 "$MINIKUBEIP"
+sudo route -n add 10.0.0.0/24 "$MINIKUBEIP"
+
+sudo mkdir -p /etc/resolver
+{
+  echo "nameserver 10.0.0.10"
+  echo "domain cluster.local"
+  echo "search_order 1"
+} | sudo tee /etc/resolver/cluster.local
