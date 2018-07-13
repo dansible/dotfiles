@@ -7,17 +7,17 @@ set completion-ignore-case on
 set show-all-if-ambiguous on
 
 # Make TAB cycle through possible completions
-"\t": menu-complete
+#"\t": menu-complete
 # Make SHIFT-TAB reverse cycle through possible completions
-"\e[Z": "\e-1\C-i"
+#"\e[Z": "\e-1\C-i"
 
 # Use the string that has already been typed as the prefix for searching
 # through commands (i.e. more intelligent Up/Down-arrow behavior)
-"\e[B": history-search-forward
-"\e[A": history-search-backward
+#"\e[B": history-search-forward
+#"\e[A": history-search-backward
 
 # Show all autocomplete results at once
-set page-completions off
+set page-completions on
 
 # If there are more than 200 possible completions for a word, ask to show them all
 set completion-query-items 200
