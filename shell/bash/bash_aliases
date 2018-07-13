@@ -129,3 +129,5 @@ alias cp='cp -iv'
 alias mv='mv -iv'
 alias mkdir='mkdir -pv'
 alias rm='rm -i'
+
+alias codot='code ~/.dotfiles'
