@@ -23,7 +23,7 @@ case "$TARGET" in
         ;;
     shell)
         e_header "Creating symbolic links..."
-        bash bin/__init.sh
+        bash shell/__init.sh
         ;;
     *)
         e_header "ERROR - This script requires an argument of 'all', 'bin', or 'shell'"
