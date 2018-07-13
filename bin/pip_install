@@ -42,6 +42,7 @@ install_packages() {
       'setuptools'
       'six'
       'subprocess32'
+      'testinfra'
       'urllib3'
       'virtualenv'
       'wheel'
