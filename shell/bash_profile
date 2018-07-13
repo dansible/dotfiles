@@ -21,10 +21,6 @@ load_bash() {
         "${BASH_FILES}/bash_options"
         "${BASH_FILES}/bash_paths"
         "${BASH_FILES}/bash_prompt"
-
-        "${FUNCTIONS}/pyserver"
-        "${FUNCTIONS}/git-updateall"
-
         "${BREW_PREFIX}/etc/bash_completion"
     )
     # if these files are readable, source them
