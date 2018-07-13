@@ -4,6 +4,7 @@
 
 # TODO:
 The following apps currently require manual installs
+<!--- BUCC/Bosh (https://github.com/starkandwayne/bucc)(https://bosh.io/docs/cli-v2-install/)-->
 - Docker
 - Dropbox
 - Essence (vscode) - plugins?

@@ -41,6 +41,7 @@ install_packages() {
         'bash-completion2'
         'bashdb' # bash debugger
         'coreutils' # GNU core utilities (those that come with OS X are outdated)
+        'direnv'
         'findutils' # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
         'git'
         'gnu-sed --with-default-names' # Install GNU `sed`, overwriting the built-in `sed`
@@ -53,6 +54,7 @@ install_packages() {
         'jq'
         'kubernetes-cli'
         'kubernetes-helm'
+        'minikube'
         'nmap'
         'node'
         'openssh'
