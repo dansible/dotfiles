@@ -12,6 +12,7 @@ install_packages() {
     local -a packages=(
       'ansible'
       'ansible-vault'
+      'blastradius' # terraform graphs: https://28mm.github.io/blast-radius-docs/
       'colorama'
       'cryptography'
       'docutils'
