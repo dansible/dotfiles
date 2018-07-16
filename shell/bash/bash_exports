@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# set -x
+# set -o errexit
+# set -o pipefail
+
 # bash_exports
 
 ###--------------------------------SHELL-------------------------------###
@@ -22,6 +26,9 @@ export LC_ALL='en_US.UTF-8';
 # Avoid issues with `gpg` as installed via Homebrew.
 # https://stackoverflow.com/a/42265848/96656
 export GPG_TTY=$(tty);
+
+# Extra libs for python? http://www.roguebasin.com/index.php?title=Complete_Roguelike_Tutorial,_using_python3%2Blibtcod,_setup_Mac
+# export LIBTCOD_DLL_PATH="/usr/local/lib;/usr/lib;$HOME/.local/lib;$HOME/lib"
 
 
 
