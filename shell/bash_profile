@@ -1,6 +1,10 @@
 #!/bin/bash
 # .bash_profile
 
+# set -x
+# set -o errexit
+# set -o pipefail
+
 # set 256 color profile where possible
 #if [[ $COLORTERM == gnome-* && $TERM == xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
 #    export TERM=gnome-256color
@@ -21,12 +25,16 @@ load_bash() {
         "${BASH_FILES}/bash_options"
         "${BASH_FILES}/bash_paths"
         "${BASH_FILES}/bash_prompt"
-        "${BREW_PREFIX}/etc/bash_completion"
     )
     # if these files are readable, source them
     for index in ${!files[*]} ; do
       [ -r "${files[$index]}" ] && source "${files[$index]}"
     done
+
+    for bash_completion in "${BREW_PREFIX}/etc/bash_completion.d/"* ; do
+        [ -r "$bash_completion" ] && source "$bash_completion"
+    done
+
 }
 load_bash
-#unset load_bash
+unset load_bash
