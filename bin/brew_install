@@ -42,10 +42,12 @@ install_packages() {
         'bashdb' # bash debugger
         'coreutils' # GNU core utilities (those that come with OS X are outdated)
         'direnv'
+        'dnsmasq' # enables custom resolvers: https://medium.com/@narakuw/brew-install-dnsmasq-in-macos-sierra-26021c824be8
         'findutils' # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
         'git'
         'gnu-sed --with-default-names' # Install GNU `sed`, overwriting the built-in `sed`
         'grep'
+        'graphviz' # terraform graphs: https://28mm.github.io/blast-radius-docs/
         'highlight' # needed 4 basics like less, vim, code, etc
         'htop'
         'hugo'
