@@ -1,4 +1,8 @@
-#!/bin/bash -x
+#!/bin/bash
+
+# set -x
+# set -o errexit
+# set -o pipefail
 
 # bash_paths
 
@@ -10,35 +14,31 @@ declare -a dirs_to_prepend=(
 
 # Directories to be appended to PATH
 declare -a dirs_to_append=(
-    "/usr/bin"
     "${HOME}/bin"
     "${HOME}/.dotfiles/shell/functions"
     "/usr/local/Cellar"
-    "${BREW_PREFIX}"/libexec/gnubin # Add brew-installed GNU core utilities bin
-    "${BREW_PREFIX}"/share/npm/bin # Add npm-installed package bin
+    # "${BREW_PREFIX}"/libexec/gnubin # Add brew-installed GNU core utilities bin
+    # "${BREW_PREFIX}"/share/npm/bin # Add npm-installed package bin
 )
 
 # ensure the path hasn't already been set
-if [ ! $(echo "$PATH" | grep "$HOME") ] ; then {
+if grep -v "$HOME" "$PATH" &>/dev/null ; then {
     # Prepend directories to PATH
-    for index in ${!dirs_to_prepend[*]}
-    do
-        if [ -d ${dirs_to_prepend[$index]} ] ; then
+    for i in ${!dirs_to_prepend[*]} ; do
+        if [ -d "${dirs_to_prepend[$i]}" ] && grep -v "${dirs_to_prepend[$i]}" "$PATH" &>/dev/null; then
             # If these directories exist, then prepend them to existing PATH
-            PATH="${dirs_to_prepend[$index]}:$PATH"
+            PATH="${dirs_to_prepend[$i]}:$PATH"
         fi
     done
 
     # Append directories to PATH
-    for index in ${!dirs_to_append[*]}
-    do
-        if [ -d ${dirs_to_append[$index]} ] && [ ! $(echo "$PATH" | grep "${dirs_to_append[$index]}") ] ; then
+    for i in ${!dirs_to_append[*]} ; do
+        if [ -d "${dirs_to_append[$i]}" ] && grep -v "${dirs_to_append[$i]}" "$PATH" &>/dev/null; then
             # If these bins exist, then append them to existing PATH
-            PATH="$PATH:${dirs_to_append[$index]}"
+            PATH="$PATH:${dirs_to_append[$i]}"
         fi
     done
 } fi
 
 unset dirs_to_prepend dirs_to_append
-
 export PATH
