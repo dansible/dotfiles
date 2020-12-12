@@ -64,7 +64,8 @@ set lazyredraw           			"Don't redraw while executing macros (good performan
 set ruler                			"Always show cursor position
 set cursorline           			"Use leader+e to toglle
 
-let &showbreak='+++ '      		"Show a > for word-wrapped lines
+set nowrap								"Disable word wrap
+"let &showbreak='+++ '      		"Show a > for word-wrapped lines
 "set hid                   		"A buffer becomes hidden when it is abandoned
 "set magic                 		"For expressions turn magic on
 
